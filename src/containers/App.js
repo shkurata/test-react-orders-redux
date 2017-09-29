@@ -6,32 +6,24 @@ import { loadData } from '../actions'
 
 class App extends Component {
   componentDidMount() {
-    if (!this.props.isDataLoaded) {
+    if (!this.props.dataIsLoaded) {
       this.props.dispatch(loadData())
     }
   }
-
   render() {
-    return (
-      <div>
-        {this.props.isDataLoaded ? (
-          <OrderContainer orderId={"2"}/>
-        ) : (
-          <h1>Loading data...</h1>
-        )}
-      </div>
-    )
+    if (!this.props.dataIsLoaded) return null
+    return <OrderContainer orderId={"2"}/>
   }
 }
 
 PropTypes.App = {
-  isDataLoaded: PropTypes.bool.isRequired,
+  dataIsLoaded: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => {
   return {
-    isDataLoaded: state.isDataLoaded
+    dataIsLoaded: state.dataIsLoaded
   }
 }
 

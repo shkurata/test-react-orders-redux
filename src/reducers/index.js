@@ -86,9 +86,9 @@ const itemList = (state = {}, action) => {
   }
 }
 
-const isDataLoaded = (state = false, action) => {
+const dataIsLoaded = (state = false, action) => {
   switch (action.type) {
-    case 'IS_DATA_LOADED':
+    case 'DATA_IS_LOADED':
       return action.status
     default:
       return state
@@ -114,7 +114,7 @@ const orderApp = combineReducers({
   clients,
   orders,
   itemList,
-  isDataLoaded
+  dataIsLoaded
  })
 
 export default orderApp

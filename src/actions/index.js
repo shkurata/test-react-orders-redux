@@ -12,7 +12,7 @@ export const loadData = () => dispatch => {
     loadDataFor('orders', dispatch),
     loadDataFor('products', dispatch),
     loadDataFor('clients', dispatch),
-  ]).then(() => dispatch(isDataLoaded(true)))
+  ]).then(() => dispatch(dataIsLoaded(true)))
 }
 
 
@@ -54,9 +54,9 @@ export const changeClient = (orderId, clientId) => {
   }
 }
 
-export const isDataLoaded = status => {
+export const dataIsLoaded = status => {
   return {
-    type: 'IS_DATA_LOADED',
+    type: 'DATA_IS_LOADED',
     status
   }
 }
