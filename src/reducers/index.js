@@ -82,7 +82,16 @@ const itemList = (state = {}, action) => {
     case 'RECEIVE_ITEMS':
       return orderItemsToOuterObject(action.data)
     default:
-      return state;
+      return state
+  }
+}
+
+const isDataLoaded = (state = false, action) => {
+  switch (action.type) {
+    case 'IS_DATA_LOADED':
+      return action.status
+    default:
+      return state
   }
 }
 
@@ -104,7 +113,8 @@ const orderApp = combineReducers({
   products,
   clients,
   orders,
-  itemList
+  itemList,
+  isDataLoaded
  })
 
 export default orderApp

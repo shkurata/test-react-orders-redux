@@ -7,17 +7,20 @@ export const receiveData = (dataType) => {
   }
 }
 
-export const loadData = () => dispatch =>
+export const loadData = () => dispatch => {
   Promise.all([
     loadDataFor('orders', dispatch),
     loadDataFor('products', dispatch),
-    loadDataFor('clients', dispatch)
-  ])
+    loadDataFor('clients', dispatch),
+  ]).then(() => dispatch(isDataLoaded(true)))
+}
 
 
 const loadDataFor = (dataType, dispatch) => {
   return fetch('http://localhost:1112/' + dataType)
-    .then(response => response.json())
+    .then(response => {
+      return response.json()
+    })
     .then(data => {
       if (dataType === 'orders') {
         dispatch(receiveData('items')(data))
@@ -48,5 +51,12 @@ export const changeClient = (orderId, clientId) => {
     type: 'CHANGE_CLIENT',
     orderId,
     clientId
+  }
+}
+
+export const isDataLoaded = status => {
+  return {
+    type: 'IS_DATA_LOADED',
+    status
   }
 }

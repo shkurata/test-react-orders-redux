@@ -1,17 +1,38 @@
 import React, { Component } from 'react'
-// import SelectItems from '../containers/SelectItems'
-// import ItemsList from '../containers/ItemsList'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import OrderContainer from './OrderContainer'
+import { loadData } from '../actions'
 
 class App extends Component {
+  componentDidMount() {
+    if (!this.props.isDataLoaded) {
+      this.props.dispatch(loadData())
+    }
+  }
+
   render() {
     return (
       <div>
-
-        <OrderContainer orderId={"2"}/>
+        {this.props.isDataLoaded ? (
+          <OrderContainer orderId={"2"}/>
+        ) : (
+          <h1>Loading data...</h1>
+        )}
       </div>
     )
   }
 }
 
-export default App
+PropTypes.App = {
+  isDataLoaded: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => {
+  return {
+    isDataLoaded: state.isDataLoaded
+  }
+}
+
+export default connect(mapStateToProps)(App)
