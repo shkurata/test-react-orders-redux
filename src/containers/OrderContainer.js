@@ -4,8 +4,8 @@ import Order from '../components/Order'
 
 const mapStateToProps = (state, ownProps) => {
   const orderItems = state.itemList[ownProps.orderId]
-  return {
-    order: {
+  const orderFields = state.orders[ownProps.orderId] ?
+    {
       ...state.orders[ownProps.orderId],
       items: Object.keys(orderItems).map(id => ({
         id,
@@ -15,7 +15,12 @@ const mapStateToProps = (state, ownProps) => {
           .toFixed(2),
         description: state.products[id].description
       }))
-    },
+    } : {
+      id: ownProps.orderId,
+      items: []
+    }
+  return {
+    order: orderFields,
     clients: state.clients,
     products: state.products
   }
@@ -23,8 +28,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    removeItem: (itemId) => {
-      dispatch(removeItem(ownProps.orderId, itemId))
+    removeItem: (itemId, itemTotal) => {
+      dispatch(removeItem(ownProps.orderId, itemId, itemTotal))
     },
     addItem: (item, quantity) => {
       dispatch(addItem(ownProps.orderId, item, quantity))

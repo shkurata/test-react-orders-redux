@@ -29,11 +29,12 @@ const loadDataFor = (dataType, dispatch) => {
     })
 }
 
-export const removeItem = (orderId, itemId) => {
+export const removeItem = (orderId, itemId, itemTotal) => {
   return {
     type: 'REMOVE_ITEM_FROM_LIST',
     orderId,
-    itemId
+    itemId,
+    itemTotal
   }
 }
 
@@ -58,5 +59,13 @@ export const dataIsLoaded = status => {
   return {
     type: 'DATA_IS_LOADED',
     status
+  }
+}
+
+
+export const addEmptyOrder = orderId => {
+  return {
+    type: 'ADD_EMPTY_ORDER',
+    orderId
   }
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import OrderContainer from './OrderContainer'
+import OrderList from './OrderList'
 import { loadData } from '../actions'
 
 class App extends Component {
@@ -12,7 +14,14 @@ class App extends Component {
   }
   render() {
     if (!this.props.dataIsLoaded) return null
-    return <OrderContainer orderId={"2"}/>
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={OrderList} />
+          <Route path="/:order_id" render={({match}) => <OrderContainer orderId={match.params.order_id}/>} />
+        </Switch>
+      </Router>
+    )
   }
 }
 

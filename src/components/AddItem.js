@@ -11,7 +11,7 @@ const AddItem = ({products, addItem}) => {
             {products[id].description}
           </option>)}
       </select>
-      <input type="number" defaultValue="1" ref={qnty => {quantity = qnty}}/>
+      <input type="number" defaultValue="1" min="1" ref={qnty => {quantity = qnty}}/>
       <button onClick={() => {
         addItem(products[selected.value], quantity.value)
       }}>

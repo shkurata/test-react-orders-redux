@@ -30,6 +30,32 @@ const orders = (state = {}, action) => {
           'customer-id': action.clientId
         }
       }
+    case 'ADD_EMPTY_ORDER':
+      return {
+        ...state,
+        [action.orderId]: {
+          id: action.orderId,
+          'customer-id': '1',
+          total: 0
+        }
+      }
+    case 'ADD_ITEM_TO_LIST':
+      return {
+        ...state,
+        [action.orderId]: {
+            ...state[action.orderId],
+            total: (+state[action.orderId].total + +action.item.price * action.quantity).toFixed(2)
+        }
+      }
+      case 'REMOVE_ITEM_FROM_LIST':
+        return {
+          ...state,
+          [action.orderId]: {
+              ...state[action.orderId],
+              total: (state[action.orderId].total - action.itemTotal).toFixed(2)
+          }
+        }
+
     default:
       return state
   }
@@ -81,6 +107,11 @@ const itemList = (state = {}, action) => {
       }
     case 'RECEIVE_ITEMS':
       return orderItemsToOuterObject(action.data)
+    case 'ADD_EMPTY_ORDER':
+      return {
+        ...state,
+        [action.orderId]: {}
+      }
     default:
       return state
   }

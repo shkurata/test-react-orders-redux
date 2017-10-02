@@ -4,7 +4,7 @@ import '../style/style.min.css'
 
 
 const ItemList = ({items, removeItem}) => {
-  let total = items.reduce((a, b) => a + +b.total, 0).toFixed(2);
+  let total = items.reduce((a, b) => a + +b.total, 0).toFixed(2) || 0;
   return (
     <div>
       <h3>Total: ${total}</h3>
@@ -25,7 +25,7 @@ const ItemList = ({items, removeItem}) => {
             <td>${item.price}</td>
             <td>${item.total}</td>
             <td>
-              <button onClick={() => removeItem(item.id)}>
+              <button onClick={() => removeItem(item.id, item.total)}>
                 Remove item
               </button>
             </td>
