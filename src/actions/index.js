@@ -1,5 +1,5 @@
-export const receiveData = (dataType) => {
-  return (data) => {
+export const receiveData = dataType => {
+  return data  => {
     return {
       type: 'RECEIVE_' + dataType.toUpperCase(),
       data
@@ -62,6 +62,12 @@ export const dataIsLoaded = status => {
   }
 }
 
+export const saveOrderOnServer = order => {
+  return {
+    type: 'SAVE_ORDER_ON_SERVER',
+    order
+  }
+}
 
 export const addEmptyOrder = orderId => {
   return {
