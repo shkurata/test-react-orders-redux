@@ -40,7 +40,7 @@ app.get('/orders', function(req, res) {
 });
 
 app.post('/save-order', function(req, res) {
-	fs.writeFileSync('./order' + req.body.id + '.json', JSON.stringify(req.body), 'utf8')
+	fs.writeFileSync('./order' + req.body.id + '.json', JSON.stringify(req.body, null, '\t'), 'utf8')
 });
 
 app.listen(1112);
