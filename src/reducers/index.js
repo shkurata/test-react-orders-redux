@@ -27,7 +27,8 @@ const orders = (state = {}, action) => {
         ...state,
         [action.orderId]: {
           ...state[action.orderId],
-          'customer-id': action.clientId
+          'customer-id': action.clientId,
+          changed: true
         }
       }
     case 'ADD_EMPTY_ORDER':
@@ -44,7 +45,8 @@ const orders = (state = {}, action) => {
         ...state,
         [action.orderId]: {
             ...state[action.orderId],
-            total: (+state[action.orderId].total + +action.item.price * action.quantity).toFixed(2)
+            total: (+state[action.orderId].total + +action.item.price * action.quantity).toFixed(2),
+            changed: true
         }
       }
       case 'REMOVE_ITEM_FROM_LIST':
@@ -52,7 +54,8 @@ const orders = (state = {}, action) => {
           ...state,
           [action.orderId]: {
               ...state[action.orderId],
-              total: (state[action.orderId].total - action.itemTotal).toFixed(2)
+              total: (state[action.orderId].total - action.itemTotal).toFixed(2),
+              changed: true
           }
         }
 

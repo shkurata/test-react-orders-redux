@@ -12,7 +12,10 @@ const OrderList = ({orders, history, addEmptyOrder}) => {
      <ul>
        {orders.map(order => (
          <li key={order.id}>
-           <Link to={`${order.id}`}>Order #{order.id} from {order.customer} for total ${order.total}</Link>
+           <Link to={`${order.id}`}>
+             Order #{order.id} from {order.customer} for total ${order.total}
+           </Link>
+           <button disabled={!order.changed}>Save</button>
          </li>
        )
      )}
@@ -21,8 +24,10 @@ const OrderList = ({orders, history, addEmptyOrder}) => {
            const orderID = orders.length + 1 + ''
           addEmptyOrder(orderID)
           history.push(orderID)
-       }}>Add new order</button>
-
+       }}>
+         Add new order
+       </button>
+      <button>Save orders</button>
    </div>
  )
 }
@@ -36,7 +41,8 @@ const mapStateToProps = state => {
     orders: Object.keys(state.orders).map(orderID => ({
       id: orderID,
       customer: state.clients[state.orders[orderID]['customer-id']].name,
-      total: state.orders[orderID].total
+      total: state.orders[orderID].total,
+      changed: state.orders[orderID].changed
     }))
   }
 }
