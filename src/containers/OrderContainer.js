@@ -40,7 +40,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-
 const OrderContainer = connect(
   mapStateToProps,
   mapDispatchToProps

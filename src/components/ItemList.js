@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../style/style.min.css'
 
-
 const ItemList = ({items, removeItem}) => {
   let total = items.reduce((a, b) => a + +b.total, 0).toFixed(2) || 0;
   return (

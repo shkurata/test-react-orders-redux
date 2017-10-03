@@ -21,10 +21,9 @@ const OrderList = ({orders, history, addEmptyOrder, saveOrderOnServer}) => {
              <img src={checkmark} style={checkmarkStyle} alt="saved"/>
            ) : (
              <button disabled={!order.changed}
-             onClick={()=> saveOrderOnServer(order.fullContent)}>
+                     onClick={()=> saveOrderOnServer(order.fullContent)}>
              Save
              </button>
-
            )}
          </li>
        )
@@ -62,4 +61,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { addEmptyOrder, saveOrderOnServer })(OrderList))
+export default withRouter(connect(
+  mapStateToProps,
+  { addEmptyOrder, saveOrderOnServer }
+)(OrderList))

@@ -1,34 +1,3 @@
-export const receiveData = dataType => {
-  return data  => {
-    return {
-      type: 'RECEIVE_' + dataType.toUpperCase(),
-      data
-    }
-  }
-}
-
-export const loadData = () => dispatch => {
-  Promise.all([
-    loadDataFor('orders', dispatch),
-    loadDataFor('products', dispatch),
-    loadDataFor('clients', dispatch),
-  ]).then(() => dispatch(dataIsLoaded(true)))
-}
-
-
-const loadDataFor = (dataType, dispatch) => {
-  return fetch('http://localhost:1112/' + dataType)
-    .then(response => {
-      return response.json()
-    })
-    .then(data => {
-      if (dataType === 'orders') {
-        dispatch(receiveData('items')(data))
-      }
-      dispatch(receiveData(dataType)(data))
-    })
-}
-
 export const removeItem = (orderId, itemId, itemTotal) => {
   return {
     type: 'REMOVE_ITEM_FROM_LIST',
@@ -74,4 +43,34 @@ export const addEmptyOrder = orderId => {
     type: 'ADD_EMPTY_ORDER',
     orderId
   }
+}
+
+export const receiveData = dataType => {
+  return data  => {
+    return {
+      type: 'RECEIVE_' + dataType.toUpperCase(),
+      data
+    }
+  }
+}
+
+export const loadData = () => dispatch => {
+  Promise.all([
+    loadDataFor('orders', dispatch),
+    loadDataFor('products', dispatch),
+    loadDataFor('clients', dispatch),
+  ]).then(() => dispatch(dataIsLoaded(true)))
+}
+
+const loadDataFor = (dataType, dispatch) => {
+  return fetch('http://localhost:1112/' + dataType)
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      if (dataType === 'orders') {
+        dispatch(receiveData('items')(data))
+      }
+      dispatch(receiveData(dataType)(data))
+    })
 }

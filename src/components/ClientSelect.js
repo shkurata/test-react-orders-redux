@@ -5,7 +5,8 @@ const ClientSelect = ({clients, selectedClient, changeClient}) => {
   return (
     <div>
       <label>Client: </label>
-      <select onChange={(e) => changeClient(e.target.value)} value={selectedClient}>
+      <select onChange={(e) => changeClient(e.target.value)}
+              value={selectedClient}>
         {Object.keys(clients).map(id =>
           <option key={id} value={id}>
           {clients[id].name}

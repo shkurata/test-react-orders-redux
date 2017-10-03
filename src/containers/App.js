@@ -18,7 +18,10 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={OrderList} />
-          <Route path="/:order_id" render={({match}) => <OrderContainer orderId={match.params.order_id}/>} />
+          <Route path="/:order_id"
+                 render={({match}) =>
+                   <OrderContainer orderId={match.params.order_id}/>
+          }/>
         </Switch>
       </Router>
     )
