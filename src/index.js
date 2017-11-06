@@ -17,6 +17,8 @@ let store = createStore(
   applyMiddleware(...middleware)
 )
 
+let test = 'sdsdsdsd'
+
 ReactDOM.render(
   <Provider store={store}>
     <App/>
